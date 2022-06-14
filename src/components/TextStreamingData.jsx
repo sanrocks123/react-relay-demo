@@ -9,7 +9,7 @@ import uuid from 'react-uuid';
 
 const serverBaseURL = "http://localhost:1000";
 
-export function AgGridStreamingComponent() {
+export function TextStreamingDataComponent() {
 
     const [rowData, setRowData] = useState([]);
 
@@ -72,30 +72,11 @@ export function AgGridStreamingComponent() {
     }, []);
 
     return (
-        /** 
-        <div>
-          { 
-            data
-            .map((d, key) => (
-                <div key={key}>{d.eventId}, {d.body.securityId}, {d.body.securityName} {d.body.currentPrice}, {d.body.timeStamp}</div>
-              )
-            )
-            }
-        </div>
-      */
-
-        <div className="ag-theme-alpine" style={{ width: 1100, height: 500 }}>
-            <AgGridReact
-                rowData={rowData}
-                columnDefs={columnDefs}
-                animateRows={true}
-                rowSelection='multiple'
-                getRowId={getRowId}
-            />
+        <div style={{ width: 1100, height: 500 }}>
             {
                 rowData
                     .map((d, key) => (
-                        <div key={key}>{d.securityName}</div>
+                        <div key={key}>{d.securityId} {d.securityName} {d.currentPrice}</div>
                     )
                     )
             }
