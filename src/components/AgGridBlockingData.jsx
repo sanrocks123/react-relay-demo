@@ -24,7 +24,6 @@ export function AgGridBlockingComponent() {
     //const getRowId = useCallback((params) => params.data.id, []);
 
     useEffect(() => {
-
         const fetchData = async () => {
             const response = await fetch(`${serverBaseURL}/v1/product-quote/list`, {
                 method: "GET",
@@ -53,7 +52,7 @@ export function AgGridBlockingComponent() {
     }, []);
 
     return (
-        <div className="ag-theme-alpine" style={{ width: 1100, height: 500 }}>
+        <div className="ag-theme-alpine" style={{ width: 1050, height: 500 }}>
             <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDefs}

@@ -1,7 +1,6 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -72,7 +71,7 @@ export function TextStreamingDataComponent() {
     }, []);
 
     return (
-        <div style={{ width: 1100, height: 500 }}>
+        <div style={{ width: 1050, height: 500 }}>
             {
                 rowData
                     .map((d, key) => (

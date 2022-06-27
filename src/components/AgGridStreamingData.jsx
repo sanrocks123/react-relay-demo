@@ -25,6 +25,7 @@ export function AgGridStreamingComponent() {
     const getRowId = useCallback((params) => params.data.id, []);
 
     useEffect(() => {
+        let isMounted = true;
         const fetchData = async () => {
             await fetchEventSource(`${serverBaseURL}/v1/product-quote/stream`, {
                 method: "GET",
@@ -43,6 +44,12 @@ export function AgGridStreamingComponent() {
                     }
                 },
                 onmessage(event) {
+
+                    if (!isMounted) {
+                        console.log('ag-grid streaming component unmounted')
+                        return;
+                    }
+
                     const eventData = JSON.parse(event.data);
                     //console.log(eventData)
 
@@ -69,10 +76,14 @@ export function AgGridStreamingComponent() {
             });
         };
         fetchData();
+        return () => {
+            isMounted = false;
+            console.log('todo cleanup')
+        }
     }, []);
 
     return (
-        <div className="ag-theme-alpine" style={{ width: 1100, height: 500 }}>
+        <div className="ag-theme-alpine" style={{ width: 1050, height: 500 }}>
             <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDefs}
