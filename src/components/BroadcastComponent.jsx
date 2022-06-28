@@ -17,8 +17,8 @@ export default function BroadcastComponent() {
 function UserNameSearch() {
     const userNameBroadcastChannel = new BroadcastChannel(userNameBroadcastChannelName);
     const userNameValidationChannel = new BroadcastChannel(userNameValidationChannelName);
-    const [form, setForm] = useState({ name: 'init-message' });
-    const [result, setResult] = useState({ isAvailable: false });
+    const [form, setForm] = useState({ name: '' });
+    const [result, setResult] = useState({ isAlreadyTaken: false });
 
     const onSubmit = (values) => {
         console.log('onSubmitButtonClickEvent')
@@ -29,7 +29,7 @@ function UserNameSearch() {
 
     userNameValidationChannel.onmessage = event => {
         console.log('userNameValidationChannel onMessage: ' + JSON.stringify(event.data))
-        setResult({ isAvailable: event.data.isAvailable });
+        setResult({ isAlreadyTaken: event.data.isAlreadyTaken });
     }
 
     useEffect(() => {
@@ -39,14 +39,14 @@ function UserNameSearch() {
 
     return (
         <div>
-            <p>UserNameSearch</p>
+            <p>UserNameSearchComponent</p>
             <Formik initialValues={form} onSubmit={onSubmit}>
                 <Form>
                     <Field id="name" name="name" placeholder="type here" />
                     <button type="submit">Check</button>
                 </Form>
             </Formik>
-            <p>Duplicate Status : {result.isAvailable ? "YES" : "NO"}</p>
+            <p>Status : {result.isAlreadyTaken ? "Sorry, username already taken !" : "Great, this is available !"}</p>
         </div>
     );
 }
@@ -56,8 +56,8 @@ function UserNameValidation() {
     const userNameBroadcastChannel = new BroadcastChannel(userNameBroadcastChannelName);
     const userNameValidationChannel = new BroadcastChannel(userNameValidationChannelName);
 
-    const [userNames, setUserNames] = useState(['initial-userNameState']);
-    const [data, setData] = useState({ value: 'intial-data' });
+    const [userNames, setUserNames] = useState(['sanrocks123']);
+    const [data, setData] = useState({ value: 'mockapis' });
 
     useEffect(() => {
 
@@ -67,17 +67,20 @@ function UserNameValidation() {
         }
 
         console.log('data : ' + data.value);
-        setUserNames(userNames => [...userNames, data.value]);
-
         const isFound = userNames.includes(data.value);
-        userNameValidationChannel.postMessage({ isAvailable: isFound, message: data.value });
-
+        if (isFound) {
+            console.log('user name already exists - ' + data.value);
+            userNameValidationChannel.postMessage({ isAlreadyTaken: isFound, message: data.value });
+            return;
+        }
+        setUserNames(userNames => [...userNames, data.value]);
+        userNameValidationChannel.postMessage({ isAlreadyTaken: isFound, message: data.value });
     }, [data]);
 
     return (
         <div id="UserNameValidation">
             <br />
-            <p>UserNameValidation</p>
+            <p>UserNameValidationComponent</p>
             {
                 userNames.map((v, k) => (
                     <div key={k}> {JSON.stringify(v)}</div>
