@@ -13,13 +13,13 @@ export function App() {
       <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <div className="container">
           <a className="navbar-brand" href="https://www.linkedin.com/in/sanjeevkumar-saxena-84421b45/">
-            <img src="me.png" style={{ width: 200 }} />
+            <img src="me.png" style={{ width: 200 }} className="" />
           </a>
           <div className='page-header'>
             <h1>sanrocks123 webspace!</h1>
             <p>A curated implementation of some of the modern webapp development APIs.
               Please feel free to download the source code available at my github account
-              &nbsp;<a href="https://github.com/sanrocks123">sannrocks123</a> & extend it further as required.
+              &nbsp;<a href="https://github.com/sanrocks123">sanrocks123</a> & extend it further as required.
             </p>
             <p>Watch out this space for more updates!</p>
           </div>
