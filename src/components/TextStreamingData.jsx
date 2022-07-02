@@ -11,6 +11,7 @@ const serverBaseURL = "http://localhost:1000";
 export function TextStreamingDataComponent() {
 
     const [rowData, setRowData] = useState([]);
+    const [streaming, setStreaming] = useState({ isStreaming: false });
 
     const columnDefs = [
         //{ headerName: 'rowID', valueGetter: 'node.id' },
@@ -24,7 +25,7 @@ export function TextStreamingDataComponent() {
     const getRowId = useCallback((params) => params.data.id, []);
 
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             await fetchEventSource(`${serverBaseURL}/v1/product-quote/stream`, {
                 method: "GET",
                 headers: {
@@ -42,6 +43,7 @@ export function TextStreamingDataComponent() {
                     }
                 },
                 onmessage(event) {
+
                     const eventData = JSON.parse(event.data);
                     //console.log(eventData)
 
@@ -53,11 +55,8 @@ export function TextStreamingDataComponent() {
                         securityName: eventData.body.securityName,
                         currentPrice: eventData.currentPrice
                     };
-
-                    //console.log(rowEventData);
-
+                    setStreaming({ isStreaming: true });
                     setRowData(rowData => [...rowData, rowEventData]);
-
                 },
                 onclose() {
                     console.log("Connection closed by the server");
@@ -66,19 +65,35 @@ export function TextStreamingDataComponent() {
                     console.log("There was an error from server", err);
                 },
             });
-        };
-        fetchData();
+        })();
     }, []);
 
     return (
-        <div style={{ width: 1050, height: 500 }}>
-            {
-                rowData
-                    .map((d, key) => (
-                        <div key={key}>{d.securityId} {d.securityName} {d.currentPrice}</div>
-                    )
-                    )
-            }
+        <div>
+            {streaming.isStreaming ? "streaming... " : "fetching..."}
+            <span className="badge bg-info"> {rowData.length}</span>
+            <table className='table table-dark table-hover'>
+                <thead>
+                    <tr>
+                        <th>SecurityId</th>
+                        <th>SecurityName</th>
+                        <th>CurrentPrice</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        rowData
+                            .map((d, key) => (
+                                <tr key={key}>
+                                    <td>{d.securityId}</td>
+                                    <td>{d.securityName}</td>
+                                    <td>{d.currentPrice}</td>
+                                </tr>
+                            )
+                            )
+                    }
+                </tbody>
+            </table>
         </div>
     );
 }

@@ -24,9 +24,10 @@ export function AgGridStreamingComponent() {
 
     const getRowId = useCallback((params) => params.data.id, []);
 
+
     useEffect(() => {
         let isMounted = true;
-        const fetchData = async () => {
+        (async () => {
             await fetchEventSource(`${serverBaseURL}/v1/product-quote/stream`, {
                 method: "GET",
                 headers: {
@@ -74,8 +75,8 @@ export function AgGridStreamingComponent() {
                     console.log("There was an error from server", err);
                 },
             });
-        };
-        fetchData();
+
+        })();
         return () => {
             isMounted = false;
             console.log('todo cleanup')
@@ -84,6 +85,7 @@ export function AgGridStreamingComponent() {
 
     return (
         <div className="ag-theme-alpine" style={{ width: 1050, height: 500 }}>
+            <span className="badge bg-info"> {rowData.length}</span>
             <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDefs}

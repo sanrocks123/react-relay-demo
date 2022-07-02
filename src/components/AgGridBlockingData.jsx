@@ -24,7 +24,7 @@ export function AgGridBlockingComponent() {
     //const getRowId = useCallback((params) => params.data.id, []);
 
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             const response = await fetch(`${serverBaseURL}/v1/product-quote/list`, {
                 method: "GET",
                 headers: {
@@ -47,12 +47,12 @@ export function AgGridBlockingComponent() {
                 rowArr.push(rowEventData);
             });
             setRowData(rowArr);
-        };
-        fetchData();
+        })();
     }, []);
 
     return (
         <div className="ag-theme-alpine" style={{ width: 1050, height: 500 }}>
+            <span className="badge bg-info"> {rowData.length}</span>
             <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDefs}
@@ -60,6 +60,7 @@ export function AgGridBlockingComponent() {
                 rowSelection='multiple'
             //getRowId={getRowId}
             />
+
         </div>
     );
 }

@@ -8,24 +8,44 @@ import BroadcastComponent from './components/BroadcastComponent';
 
 export function App() {
   return (
-    <div>
-      <div>
-        <ul>
-          <li><Link to="/">Home (GraphQL)</Link></li>
-          <li><Link to="/streaming-grid"> AgGrid Streaming </Link></li>
-          <li><Link to="/blocking-grid">AgGrid Blocking</Link></li>
-          <li><Link to="/streaming-text">Text Streaming</Link></li>
-          <li><Link to="/broadcast">Broadcast API</Link></li>
-        </ul>
-      </div>
+    <div className='container-md p-5 my-5'>
 
-      <Routes>
-        <Route path='/' element={<ReactRelayDataFetcher />} />
-        <Route path='/streaming-grid' element={<AgGridStreamingComponent />} />
-        <Route path='/blocking-grid' element={<AgGridBlockingComponent />} />
-        <Route path='/streaming-text' element={<TextStreamingDataComponent />} />
-        <Route path='/broadcast' element={<BroadcastComponent />} />
-      </Routes>
+      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div className="container">
+          <a className="navbar-brand" href="#">
+            <img src="me.jpeg" alt="Logo" style={{ width: 100 }} className="rounded-pill" />
+          </a>
+          <div className='page-header'>
+            <h1>sanrocks123 webspace!</h1>
+            <p>A curated implementation of some of the modern webapp development APIs. Please feel free to extend it further as required.</p>
+            <p></p>
+          </div>
+        </div>
+      </nav>
+
+      <div className='row'>
+        <div className='col-md-2'>
+          <ul className="nav nav-pills">
+            <li className='nav-item'><Link className='nav-link' to="/">Home (GraphQL)</Link></li>
+            <li className='nav-item'><Link className='nav-link' to="/streaming-grid"> AgGrid Streaming </Link></li>
+            <li className='nav-item'><Link className='nav-link' to="/blocking-grid">AgGrid Blocking</Link></li>
+            <li className='nav-item'><Link className='nav-link' to="/streaming-text">Table Streaming</Link></li>
+            <li className='nav-item'><Link className='nav-link' to="/broadcast">Broadcast API</Link></li>
+          </ul>
+        </div>
+
+        <div className='col-md-8'>
+          <Routes>
+            <Route path='/' element={<ReactRelayDataFetcher />} />
+            <Route path='/streaming-grid' element={<AgGridStreamingComponent />} />
+            <Route path='/blocking-grid' element={<AgGridBlockingComponent />} />
+            <Route path='/streaming-text' element={<TextStreamingDataComponent />} />
+            <Route path='/broadcast' element={<BroadcastComponent />} />
+          </Routes>
+        </div>
+
+        <div className='col-md-2'>Right Panel</div>
+      </div>
 
     </div>
   );

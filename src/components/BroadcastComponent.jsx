@@ -7,9 +7,9 @@ import { userNameBroadcastChannelName, userNameValidationChannelName } from '../
 export default function BroadcastComponent() {
     console.log('broadcast component loaded');
     return (
-        <div>
-            <UserNameSearch />
-            <UserNameValidation />
+        <div className="row">
+            <div className="col-md-6"><UserNameSearch /></div>
+            <div className="col-md-6"><UserNameValidation /> </div>
         </div>
     );
 }
@@ -18,7 +18,7 @@ function UserNameSearch() {
     const userNameBroadcastChannel = new BroadcastChannel(userNameBroadcastChannelName);
     const userNameValidationChannel = new BroadcastChannel(userNameValidationChannelName);
     const [form, setForm] = useState({ name: '' });
-    const [result, setResult] = useState({ isAlreadyTaken: false });
+    const [result, setResult] = useState({ isAlreadyTaken: '' });
 
     const onSubmit = (values) => {
         console.log('onSubmitButtonClickEvent')
@@ -34,7 +34,9 @@ function UserNameSearch() {
 
     useEffect(() => {
         console.log('UserNameSearch: useEffect ' + JSON.stringify(form));
-        userNameBroadcastChannel.postMessage(form);
+        if (form.name != "") {
+            userNameBroadcastChannel.postMessage(form);
+        }
     }, [form]);
 
     return (
@@ -42,11 +44,13 @@ function UserNameSearch() {
             <p>UserNameSearchComponent</p>
             <Formik initialValues={form} onSubmit={onSubmit}>
                 <Form>
-                    <Field id="name" name="name" placeholder="type here" />
-                    <button type="submit">Check</button>
+                    <div className="input-group mb-3">
+                        <Field id="name" name="name" placeholder="type here" className="form-control" />
+                        <button type="button" className="btn btn-primary">Check</button>
+                    </div>
                 </Form>
             </Formik>
-            <p>Status : {result.isAlreadyTaken ? "Sorry, username already taken !" : "Great, this is available !"}</p>
+            {result.isAlreadyTaken ? <p className="text-danger">Sorry, username already taken ! </p> : <p className="text-success">Great, this is available !</p>}
         </div>
     );
 }
@@ -56,8 +60,9 @@ function UserNameValidation() {
     const userNameBroadcastChannel = new BroadcastChannel(userNameBroadcastChannelName);
     const userNameValidationChannel = new BroadcastChannel(userNameValidationChannelName);
 
-    const [userNames, setUserNames] = useState(['sanrocks123']);
-    const [data, setData] = useState({ value: 'mockapis' });
+    const [userNames, setUserNames] = useState(['']);
+    const [data, setData] = useState({ value: '' });
+
 
     useEffect(() => {
 
@@ -65,6 +70,8 @@ function UserNameValidation() {
             console.log('userNameBroadcastChannel onMessage: ' + JSON.stringify(event.data))
             setData({ value: event.data.name });
         }
+
+        if (data.value == "") return;
 
         console.log('data : ' + data.value);
         const isFound = userNames.includes(data.value);
@@ -79,8 +86,7 @@ function UserNameValidation() {
 
     return (
         <div id="UserNameValidation">
-            <br />
-            <p>UserNameValidationComponent</p>
+            <p>UserNameValidationComponent <span className="badge bg-info"> {userNames.length}</span> </p>
             {
                 userNames.map((v, k) => (
                     <div key={k}> {JSON.stringify(v)}</div>
