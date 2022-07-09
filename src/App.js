@@ -5,6 +5,7 @@ import { AgGridStreamingComponent } from './components/AgGridStreamingData';
 import { ReactRelayDataFetcher } from './components/ReactRelayDataFetcher';
 import { TextStreamingDataComponent } from './components/TextStreamingData';
 import BroadcastComponent from './components/BroadcastComponent';
+import { Notification } from './components/Notifications.tsx'
 
 export function App() {
   return (
@@ -47,7 +48,7 @@ export function App() {
           </Routes>
         </div>
 
-        <div className='col-md-2'>Right Panel</div>
+        <div className='col-md-2'><Notification /></div>
       </div>
 
     </div>

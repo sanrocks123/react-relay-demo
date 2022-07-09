@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useState } from "react";
 
 const serverBaseURL = "http://localhost:1000";
@@ -8,7 +8,7 @@ export function ReactRelayDataFetcher() {
     const companyQuery = '{companyById(id:"52cdef7c4bab8bd675297d8a"){ name, emailAddress, description, tweet { text, id }}}';
 
     useEffect(() => {
-        const aa = async () => {
+        (async () => {
             const response = await fetch(`${serverBaseURL}/graphql`, {
                 method: "POST",
                 headers: {
@@ -27,14 +27,15 @@ export function ReactRelayDataFetcher() {
             return (() => {
                 console.log('unmounting...')
             });
-        }
-        aa();
+        })();
 
     }, []);
     return (
         <div id="reactRelayDataFetcher">
-            <p>default home component fetching data with GraphQL</p>
-            <pre>{JSON.stringify(company, null, 2)}</pre>
+            <Suspense fallback={<p>Loading...</p>}>
+                <p>default home component fetching data with GraphQL</p>
+                <code><pre>{JSON.stringify(company, null, 2)}</pre></code>
+            </Suspense>
         </div>
     );
 }
