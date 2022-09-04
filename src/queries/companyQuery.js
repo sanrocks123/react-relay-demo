@@ -4,6 +4,7 @@ const companyQuery = graphql`
     query companyQuery($id: ID) {
             companyById(id:$id)
             {
+                id
                 name
                 emailAddress
                 description

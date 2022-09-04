@@ -32,12 +32,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "relay": "relay-compiler",
-    "generateSchema": "get-graphql-schema http://localhost:1000/trading-bot/graphql > schema.graphql",
-    "mock-server": "node graphql-server.js --watch"
+    "generateSchema": "get-graphql-schema http://localhost:1000/trading-bot/graphql > ./data/schema.graphql",
+    "mockServer": "node ./mock/graphql-server.js --watch"
   },
   "relay": {
     "src": "./src/",
-    "schema": "./schema.graphql",
+    "schema": "./data/schema.graphql",
     "language": "typescript"
   },
   "eslintConfig": {

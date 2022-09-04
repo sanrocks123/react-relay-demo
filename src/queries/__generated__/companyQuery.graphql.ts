@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<70374bbefd9b3a2c12e50094353ac215>>
+ * @generated SignedSource<<6d78c45536e4a22ba7554f6201b5aa0d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,6 +16,7 @@ export type companyQuery$data = {
   readonly companyById: {
     readonly description: string | null;
     readonly emailAddress: string | null;
+    readonly id: string | null;
     readonly name: string | null;
     readonly tweet: {
       readonly id: string | null;
@@ -36,83 +37,80 @@ var v0 = [
     "name": "id"
   }
 ],
-v1 = [
-  {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id"
-  }
-],
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "emailAddress",
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "description",
-  "storageKey": null
-},
-v5 = {
+v1 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v6 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "Tweet",
-  "kind": "LinkedField",
-  "name": "tweet",
-  "plural": false,
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "text",
-      "storageKey": null
-    },
-    (v5/*: any*/)
-  ],
-  "storageKey": null
-};
+v2 = [
+  {
+    "alias": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "id",
+        "variableName": "id"
+      }
+    ],
+    "concreteType": "Company",
+    "kind": "LinkedField",
+    "name": "companyById",
+    "plural": false,
+    "selections": [
+      (v1/*: any*/),
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "name",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "emailAddress",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "description",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "Tweet",
+        "kind": "LinkedField",
+        "name": "tweet",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "text",
+            "storageKey": null
+          },
+          (v1/*: any*/)
+        ],
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
+  }
+];
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "companyQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Company",
-        "kind": "LinkedField",
-        "name": "companyById",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v6/*: any*/)
-        ],
-        "storageKey": null
-      }
-    ],
+    "selections": (v2/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
@@ -121,36 +119,19 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "companyQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": (v1/*: any*/),
-        "concreteType": "Company",
-        "kind": "LinkedField",
-        "name": "companyById",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v3/*: any*/),
-          (v4/*: any*/),
-          (v6/*: any*/),
-          (v5/*: any*/)
-        ],
-        "storageKey": null
-      }
-    ]
+    "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "43dc0ae2fa4b475affe2788150b9b078",
+    "cacheID": "d7ab4d82cadb306f00bade932b16e68b",
     "id": null,
     "metadata": {},
     "name": "companyQuery",
     "operationKind": "query",
-    "text": "query companyQuery(\n  $id: ID\n) {\n  companyById(id: $id) {\n    name\n    emailAddress\n    description\n    tweet {\n      text\n      id\n    }\n    id\n  }\n}\n"
+    "text": "query companyQuery(\n  $id: ID\n) {\n  companyById(id: $id) {\n    id\n    name\n    emailAddress\n    description\n    tweet {\n      text\n      id\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "57b642ec3a19aafeee8956c98d8e5eab";
+(node as any).hash = "030fdc51430fca33756d04ba4fea4ca3";
 
 export default node;

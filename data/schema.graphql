@@ -27,4 +27,3 @@ type Tweet {
   id: ID
   text: String
 }
-
