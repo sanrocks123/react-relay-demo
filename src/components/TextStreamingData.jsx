@@ -6,7 +6,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import uuid from 'react-uuid';
 
-const serverBaseURL = "http://localhost:1000";
+const serverBaseURL = "http://localhost:1000/trading-bot";
 
 export function TextStreamingDataComponent() {
 

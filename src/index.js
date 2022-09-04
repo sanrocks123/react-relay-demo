@@ -1,14 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { App } from './App';
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import reportWebVitals from './reportWebVitals';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { RelayEnvironment } from './utils/RelayEnvironment';
+
+import {
+  RelayEnvironmentProvider,
+} from 'react-relay/hooks';
+import App from './App';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:1000/trading-bot/graphql',
+  cache: new InMemoryCache(),
+});
 
 const app1 = ReactDOM.createRoot(document.getElementById('app1'));
 app1.render(
   <BrowserRouter>
-    <App />
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </RelayEnvironmentProvider>
   </BrowserRouter>
 );
 

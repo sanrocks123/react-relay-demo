@@ -1,0 +1,30 @@
+"""This directive allows results to be deferred during execution"""
+directive @defer on FIELD
+
+"""the company object"""
+type Company {
+  id: ID
+
+  """the company name"""
+  name: String
+
+  """the email address"""
+  emailAddress: String
+
+  """the phone number"""
+  phoneNumber: String
+  description: String
+  url: String
+  tweet: Tweet
+}
+
+type Query {
+  companyById(id: ID): Company
+}
+
+"""tweet composition"""
+type Tweet {
+  id: ID
+  text: String
+}
+

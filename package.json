@@ -3,24 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@microsoft/fetch-event-source": "^2.0.1",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^28.1.4",
     "@types/lodash": "^4.14.182",
     "@types/node": "^18.0.3",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/react-relay": "^14.1.1",
+    "@types/relay-runtime": "^14.1.2",
     "ag-grid-community": "^27.3.0",
     "ag-grid-react": "^27.3.0",
+    "babel-plugin-relay": "^14.1.0",
     "bootstrap": "5",
     "formik": "^2.2.9",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-relay": "14.1.0",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "react-uuid": "^1.0.2",
+    "relay-runtime": "14.1.0",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.0"
   },
@@ -28,7 +30,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "relay": "relay-compiler",
+    "generateSchema": "get-graphql-schema http://localhost:1000/trading-bot/graphql > schema.graphql",
+    "mock-server": "node graphql-server.js --watch"
+  },
+  "relay": {
+    "src": "./src/",
+    "schema": "./schema.graphql",
+    "language": "typescript"
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +57,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "apollo-server": "^3.10.2",
+    "casual": "^1.6.2",
+    "graphql": "^16.6.0",
+    "relay-compiler": "14.1.0",
+    "watchman": "^1.0.0"
   }
 }
