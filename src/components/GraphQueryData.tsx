@@ -14,11 +14,11 @@ import RelayEnvironmentProvider from 'react-relay/lib/relay-hooks/RelayEnvironme
 import { MockServer } from '../utils/RelayEnvironment';
 import companyQuery from '../queries/companyQuery';
 
-export default function GraphQlData({ refQuery }) {
+export default function GraphQueryData({ refQuery }) {
     return (
         <>
             <Suspense fallback="Loading RelayClientGraphQL....">
-                <p>RelayClientGraphQL</p>
+                <p>RelayClientPreFetchQuery</p>
                 <ErrorBoundary>
                     <RelayClientGraphQL refQuery={refQuery} />
                 </ErrorBoundary>
@@ -45,7 +45,7 @@ function RelayClientGraphQL({ refQuery }) {
 
     return (
         <ShowGraphQLData companyById={response} />
-    )
+    );
 }
 
 function RelayClientLazyLoadQuery() {
@@ -56,7 +56,7 @@ function RelayClientLazyLoadQuery() {
 
     return (
         <ShowGraphQLData companyById={data} />
-    )
+    );
 }
 
 

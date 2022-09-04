@@ -8,7 +8,7 @@ import { Notification } from './components/Notifications.tsx'
 
 import companyQuery from './queries/companyQuery.js';
 import useQueryLoader from 'react-relay/lib/relay-hooks/useQueryLoader';
-import GraphQlData from './components/GraphQlData.tsx';
+import GraphQueryData from './components/GraphQueryData.tsx';
 
 export default function App() {
   const [
@@ -54,7 +54,7 @@ function Main(queryRef) {
   return <div className='col-md-8'>
     <Routes>
       <Route path='/' element={<AgGridStreamingComponent />} />
-      <Route path='/graphql-api' element={<GraphQlData refQuery={queryRef} />} />
+      <Route path='/graphql-api' element={<GraphQueryData refQuery={queryRef} />} />
       <Route path='/blocking-grid' element={<AgGridBlockingComponent />} />
       <Route path='/streaming-text' element={<TextStreamingDataComponent />} />
       <Route path='/broadcast' element={<BroadcastComponent />} />

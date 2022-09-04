@@ -35,10 +35,14 @@ export class ErrorBoundary extends React.Component {
 }
 
 export function ErrorComponent(props) {
-    const error = JSON.parse(props.error);
+    let message = JSON.stringify(props);
+    if (props.error.errors) {
+        const err = JSON.parse(props.error);
+        message = err.errors[0].message
+    }
     return (
         <>
-            <code><p>{error.errors[0].message}</p></code>
+            <code><p>{message}</p></code>
         </>
     );
 }
