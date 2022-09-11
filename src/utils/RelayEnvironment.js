@@ -27,7 +27,7 @@ const relayEnvironment = (url) => {
                 return res;
             });
         }),
-        store: new Store(new RecordSource(), { queryCacheExpirationTime: 1 * 1000 }),
+        store: new Store(new RecordSource(), { queryCacheExpirationTime: 10 * 1000 }),
     });
 };
 

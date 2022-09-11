@@ -5,7 +5,7 @@ const company = {
     name: "Sanjeev Saxena",
     emailAddress: "sanrocks123@mail.com",
     tweet: {
-        text: "Hello Trump"
+        text: casual.words(3)
     }
 }
 
