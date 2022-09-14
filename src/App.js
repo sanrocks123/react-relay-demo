@@ -39,10 +39,7 @@ function Header() {
         </a>
         <div className='page-header'>
           <h1>sanrocks123 webspace!</h1>
-          <p>A curated implementation of some of the modern webapp development APIs.
-            Please feel free to download the source code available at my github account
-            &nbsp;<a href="https://github.com/sanrocks123">sanrocks123</a> & extend it further as required.
-          </p>
+          <p>A curated implementation of some of the modern webapp development APIs</p>
           <p>Watch out this space for more updates!</p>
         </div>
       </div>
